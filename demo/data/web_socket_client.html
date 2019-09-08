@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>web socket</title>
+</head>
+<body>
+<h1>web socket js</h1>
+
+<script>
+    /*只有支持websocket的浏览器才能运行*/
+    var wsUrl = "ws://127.0.0.1:9502";//必须以ws开头
+
+    //new出一个 websocket 实例
+    var websocket = new WebSocket(wsUrl);
+
+    //打开连接websocket
+    websocket.onopen = function(){
+        console.log('link success');
+        websocket.send("connect");//发送你需要的数据
+    };
+
+    websocket.onmessage = function(evt) {//接受返回的数据
+        console.log('success'+evt.data);
+    }
+
+    //失败的监控
+    websocket.onerror = function(evt,e) {//连接失败或者返回失败处理
+        console.log('error'+evt.data)
+    }
+
+    websocket.onclose = function (evt) {
+        console.log('close');
+    }
+
+    // 关闭Socket.... 
+    //socket.close() 
+</script>
+</body>
+</html>
